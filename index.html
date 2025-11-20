@@ -1,400 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Futuristic Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(120deg, #0b0c10 0%, #1f2833 100%);
-      background-size: 200% 200%;
-      color: #c5c6c7;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      animation: gradientMove 8s ease-in-out infinite;
-      position: relative;
-      overflow-x: hidden;
-    }
-    @keyframes gradientMove {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    /* Animated glowing particles */
-    .particles {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-    }
-    header, footer, main {
-      padding: 1rem;
-      max-width: 1000px;
-      margin: auto;
-      position: relative;
-      z-index: 1;
-    }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: rgba(31, 40, 51, 0.85);
-      border-radius: 16px;
-      box-shadow: 0 8px 32px 0 rgba(102,252,241,0.10);
-      backdrop-filter: blur(8px);
-      margin-top: 2rem;
-    }
-    nav .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      color: #66fcf1;
-      font-size: 1.8rem;
-      letter-spacing: 2px;
-      text-shadow: 0 0 10px #66fcf1, 0 0 20px #1f2833;
-    }
-    nav a {
-      color: #c5c6c7;
-      text-decoration: none;
-      margin-left: 1.5rem;
-      font-weight: 500;
-      position: relative;
-      transition: color 0.3s;
-    }
-    nav a::after {
-      content: "";
-      display: block;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #66fcf1, #45a29e);
-      transition: width 0.3s;
-      border-radius: 2px;
-      margin-top: 2px;
-    }
-    nav a:hover {
-      color: #66fcf1;
-    }
-    nav a:hover::after {
-      width: 100%;
-    }
-    .hero {
-      text-align: center;
-      padding: 5rem 1rem 3rem 1rem;
-      position: relative;
-    }
-    .hero h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3rem;
-      color: #66fcf1;
-      letter-spacing: 2px;
-      text-shadow: 0 0 18px #66fcf1, 0 0 32px #45a29e;
-      animation: neonPulse 2s infinite alternate;
-    }
-    @keyframes neonPulse {
-      from { text-shadow: 0 0 18px #66fcf1, 0 0 32px #45a29e; }
-      to { text-shadow: 0 0 32px #66fcf1, 0 0 64px #45a29e; }
-    }
-    .hero p {
-      font-size: 1.3rem;
-      margin: 1.5rem 0;
-      color: #45a29e;
-      letter-spacing: 1px;
-      opacity: 0.9;
-    }
-    .btn {
-      background: linear-gradient(90deg, #66fcf1, #45a29e);
-      color: #0b0c10;
-      padding: 0.9rem 2.2rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      box-shadow: 0 0 12px #66fcf1;
-      transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
-      margin-top: 1rem;
-    }
-    .btn:hover {
-      background: linear-gradient(90deg, #45a29e, #66fcf1);
-      box-shadow: 0 0 24px #66fcf1;
-      transform: scale(1.05);
-    }
-    section {
-      margin: 2.5rem 0;
-    }
-    section h2 {
-      text-align: center;
-      color: #66fcf1;
-      margin-bottom: 1.5rem;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
-      letter-spacing: 1px;
-      text-shadow: 0 0 8px #66fcf1;
-    }
-    .skills, .projects {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      justify-content: center;
-    }
-    .skill {
-      background: rgba(31, 40, 51, 0.7);
-      box-shadow: 0 4px 30px rgba(102,252,241,0.12);
-      border: 1px solid rgba(102,252,241,0.2);
-      padding: 1.2rem;
-      border-radius: 16px;
-      text-align: center;
-      flex: 1 1 120px;
-      max-width: 180px;
-      font-family: 'Orbitron', sans-serif;
-      color: #66fcf1;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      backdrop-filter: blur(4px);
-    }
-    .skill:hover {
-      transform: translateY(-6px) scale(1.05);
-      box-shadow: 0 8px 40px rgba(102,252,241,0.2);
-    }
-    .projects {
-      gap: 2rem;
-    }
-    .project {
-      background: rgba(31, 40, 51, 0.7);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 30px rgba(102,252,241,0.18);
-      border: 1px solid rgba(102,252,241,0.2);
-      padding: 1.1rem;
-      border-radius: 18px;
-      text-align: center;
-      flex: 1 1 260px;
-      max-width: 320px;
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .project::before {
-      content: "";
-      position: absolute;
-      top: -40px; left: -40px;
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(102,252,241,0.16) 0%, transparent 80%);
-      z-index: 0;
-    }
-    .project img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 0.8rem;
-      box-shadow: 0 0 16px #45a29e44;
-      transition: transform 0.3s;
-    }
-    .project:hover img {
-      transform: scale(1.04) rotate(-1deg);
-    }
-    .project p {
-      color: #c5c6c7;
-      font-size: 1.06rem;
-      z-index: 1;
-      position: relative;
-    }
-    .project:hover {
-      transform: translateY(-10px) scale(1.04);
-      box-shadow: 0 12px 60px rgba(102,252,241,0.30);
-      border-color: #66fcf1;
-    }
-    form {
-      background: rgba(31, 40, 51, 0.8);
-      padding: 1.5rem;
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 4px 30px rgba(102,252,241,0.10);
-      max-width: 400px;
-      margin: auto;
-      border: 1px solid rgba(102,252,241,0.10);
-      backdrop-filter: blur(6px);
-    }
-    form input, form textarea {
-      padding: 0.7rem;
-      margin-bottom: 1rem;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      background: rgba(11,12,16,0.7);
-      color: #c5c6c7;
-      outline: none;
-      transition: background 0.2s, box-shadow 0.2s;
-      box-shadow: 0 2px 8px rgba(102,252,241,0.05);
-    }
-    form input:focus, form textarea:focus {
-      background: rgba(31,40,51,0.9);
-      box-shadow: 0 0 10px #66fcf1;
-    }
-    form button {
-      align-self: flex-start;
-    }
-    footer {
-      text-align: center;
-      font-size: 1rem;
-      padding: 1.5rem 0 1rem 0;
-      color: #45a29e;
-      letter-spacing: 1px;
-      opacity: 0.85;
-    }
-    /* Responsive */
-    @media (max-width: 900px) {
-      .skills, .projects {
-        flex-direction: column;
-        align-items: center;
-      }
-      nav {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      nav a {
-        margin: 0.5rem 0;
-      }
-    }
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-      section h2 {
-        font-size: 1.3rem;
-      }
-      .project, .skill {
-        max-width: 95vw;
-      }
-      form {
-        max-width: 95vw;
-      }
-      nav {
-        margin-top: 1rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A new web page">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="favicon.ico">
+    <title>Document</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-  <!-- Animated glowing particles background -->
-  <canvas class="particles"></canvas>
+  <div class="bg">
+    <div id="about">
+
   <nav>
-    <div class="logo">ANURAG</div>
-    <div>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <h1>Hello, I'm Anurag Tiwari</h1>
-    <p>Building clean and futuristic digital experiences.</p>
-    <a class="btn" href="#projects">See My Work</a>
+    <div class="logo"><img src="Goku.jpg"/>
+  <h2>Anurag Tiwari</h2>
+</div>
+<header>
+  <h4 ><a href="#about">About</a></h4>
+  <h4 ><a href="#works">Works</a></h4>
+  <h4 ><a href="#contact">Contact</a></h4>
   </header>
-
-  <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <p style="text-align:center; max-width:600px; margin:auto;">
-        Passionate developer blending technology and design to create futuristic web apps.
-      </p>
+  <div class="ham">
+    <section>
     </section>
-
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="skills">
-        <div class="skill">HTML5</div>
-        <div class="skill">CSS3</div>
-        <div class="skill">JavaScript</div>
-        <div class="skill">React</div>
-        <div class="skill">Node.js</div>
-      </div>
+    <section>
     </section>
+  </div>
+  </nav>
+  <div class="mobile-menu">
+  <a href="#about">About</a>
+  <a href="#works">Works</a>
+  <a href="#contact">Contact</a>
+</div>
+<div >
+  <div class="about">
+  <div class="f-int">
+    <h5>About</h5>
+    <img src="Me.jpg"/>
+  <h1>Hello, I’m Anurag 👋</h1>
+  </div>
+  <div class="intro">
+    <h3 class="intro-txt">i am a <span class="title"></span><br>who loves ❤️ to build Websites and more interesting things.</h3>
+    </div>
+  </div>
+  </div>
+  </div>
+  <section class="skills-section">
+  <h2>Skills</h2>
+  <div class="skills-list">
+    <div class="skill">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Icon">
+      <span>HTML5</span>
+    </div>
+    <div class="skill">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Icon">
+      <span>CSS3</span>
+    </div>
+    <div class="skill">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Icon">
+      <span>JavaScript</span>
+    </div>
+    <div class="skill">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" alt="jQuery Icon">
+      <span>jQuery</span>
+    </div>
+    <div class="skill">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python Icon">
+      <span>Python</span>
+    </div>
+  </div>
+</section>
+  <div class="works" id="works">
+    <h5>Projects</h5>
+     <div class="projects" >
+       <div class="project1">
+       <h3>Chatting website with ai</h3>
+       <img class="image" src="chat.jpeg"/>
+       <p>Using this website user can talk to other users while using ai and all the other users are also a developer, So help each others at chatverse</p>
+       <a href="https://www.chatverse.qzz.io"><button class="button">Go Now</button></a>
+       </div>
+       <div class="project1">
+       <h3>Anime story listener</h3>
+       <img class="image" src="Anime.jpeg"/>
+       <p>In this website users can listen popular animated series stories without too much network needed because of text to speech</p>
+       <a href="https://anuragl2h.github.io/L2h-anitrest/"><button class="button">Go Now</button></a>
+       </div>
+       <div class="project1">
+       <h3>Anime and movie info searcher</h3>
+       <img class="image" src="Anime-info.jpeg"/>
+       <p>At this website you can get full information about the searched anime or movie like ratings,reviews and more</p>
+       <a href="https://anuragl2h.github.io/Movies-search"><button class="button">Go Now</button></a>
+       </div>
+     </div>
+  </div>
+  <h5>Contact with us</h5>
+  <div class="container">
+  <div class="contact" id="contact">
+  <form id="contact-form" action="https://formspree.io/f/myzwzvqe" method="POST">
+    <label for="name"><h3>Your Name ➡️</h3></label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    <label for="email"><h3>Your Email ➡️</h3></label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="projects">
-        <div class="project">
-          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Neon Dashboard" />
-          <p>Story telling</p>
-        </div>
-        <div class="project">
-          <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=600&q=80" alt="Virtual Gallery" />
-          <p>Telegram channel</p>
-        </div>
-      </div>
-    </section>
+    <label for="message"><h3>Your Message ➡️</h3></label>
+    <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+    <button class="button" type="submit">Send Message</button>
+  </form>
 
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <form onsubmit="event.preventDefault(); alert('Thanks for reaching out!'); this.reset();">
-        <input type="text" name="name" placeholder="Your name" required />
-        <input type="email" name="email" placeholder="Your email" required />
-        <textarea name="message" placeholder="Your message" rows="4" required></textarea>
-        <button class="btn" type="submit">Send</button>
-      </form>
-    </section>
-  </main>
-
+   <div id="message-sent" class="message">Your message has been sent successfully! 🎉</div>
+  </div>
+  </div>
   <footer>
-    &copy; 2024 ANURAG. All rights reserved.
+    
   </footer>
-  <script>
-    // Simple glowing particles animation for futuristic effect
-    const canvas = document.querySelector('.particles');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    function Particle() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.radius = Math.random() * 2 + 1;
-      this.color = `rgba(102,252,241,${Math.random() * 0.5 + 0.2})`;
-      this.speedX = (Math.random() - 0.5) * 0.4;
-      this.speedY = (Math.random() - 0.5) * 0.4;
-    }
-    function createParticles(num) {
-      particles = [];
-      for (let i = 0; i < num; i++) {
-        particles.push(new Particle());
-      }
-    }
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
-        ctx.fillStyle = p.color;
-        ctx.shadowColor = '#66fcf1';
-        ctx.shadowBlur = 8;
-        ctx.fill();
-        p.x += p.speedX;
-        p.y += p.speedY;
-        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
-      }
-      requestAnimationFrame(animateParticles);
-    }
-    createParticles(60);
-    animateParticles();
-  </script>
+    </div>
 </body>
+<script>
+  $(function (){
+    // Toggle mobile menu
+// Create timeline once
+let tl = gsap.timeline({ paused: true, reversed: true });
+
+tl.to(".ham", { duration: 0.5, rotation: 360 });
+
+$(".ham").on("click", function () {
+  $(".mobile-menu").toggleClass("active");
+  
+  // Toggle animation by reversing/playing
+  if (tl.reversed()) {
+    tl.play();
+  } else {
+    tl.reverse();
+  }
+});
+$('.button').on('click',
+)
+var typed = new Typed(".title",
+{    strings: ["Developer", "Designer", "Consultant","Student","Programmer"],
+        typeSpeed: 50, // Typing speed in milliseconds
+        backSpeed: 40, // Backspacing speed in milliseconds
+        loop: 2 // Loop the animation
+      })
+})
+const messageSent = document.getElementById('message-sent');
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // prevent default
+
+    const form = event.target;
+
+    fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        const messageSent = document.getElementById('message-sent');
+        messageSent.classList.add('show');
+        form.reset();
+      } else {
+        alert("error while sending the message");
+      }
+    }).catch(error => {
+      alert("error while sending the message");
+    });
+  });
+</script>
 </html>
